@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>渠道推广H5监控</title>
+    <#include "/header.html">
+        </head>
+<body>
+<div id="rrapp" v-cloak>
+    <div class="form-group" v-show="showList">
+        <div class="form-group col-sm-2">
+            <input id="statDateStart" type="text" class="form-control" v-model="q.statDateStart"
+                   @keyup.enter="query" placeholder="统计开始日期">
+        </div>
+        <div class="form-group col-sm-2">
+            <input id="statDateEnd" type="text" class="form-control" v-model="q.statDateEnd"
+                   @keyup.enter="query" placeholder="统计结束日期">
+        </div>
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.channelType" @keyup.enter="query" placeholder="渠道类型">
+        </div>
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.channelName" @keyup.enter="query" placeholder="渠道名称">
+        </div>
+    </div>
+    <div style="clear:both"></div>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-default" @click="query"><i class="fa fa-search"></i>&nbsp;查询</a></a>
+            <a class="btn btn-default" @click="e_export"><i class="fa fa-plus"></i>&nbsp;导出</a></a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">统计日期</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.statDate"
+                           placeholder="统计日期"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">渠道类型</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.channelType"
+                           placeholder="渠道类型"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">渠道名称</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.channelName"
+                           placeholder="渠道名称"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">渠道编码</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.channelCode"
+                           placeholder="渠道编码"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">注册页UV</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.registerPageUv"
+                           placeholder="注册页UV"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">手机号输入框点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.phoneInputBoxClick"
+                           placeholder="手机号输入框点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">验证码输入框点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.verifycodeInputBoxClick"
+                           placeholder="验证码输入框点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">注册按钮点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.registerBtnClick"
+                           placeholder="注册按钮点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">手机号收集数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.collectPhone"
+                           placeholder="手机号收集数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">UV到手机号转化</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.uvPhoneConversion"
+                           placeholder="UV到手机号转化"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">新注册用户数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.newRegisterUser"
+                           placeholder="新注册用户数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">老手机号数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.oldPhoneNum"
+                           placeholder="老手机号数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">下载页UV</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.downloadPageUv"
+                           placeholder="下载页UV"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">下载按钮点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.downloadBtnClick"
+                           placeholder="下载按钮点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">渠道设备激活数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.channelDeviceActive"
+                           placeholder="渠道设备激活数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">注册到激活转化</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.registerActiveConversion"
+                           placeholder="注册到激活转化"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">APP登录用户数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.appLoginTimes"
+                           placeholder="APP登录用户数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">激活到登录转化</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.activeLoginConversion"
+                           placeholder="激活到登录转化"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">产品点击用户数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.productClickUser"
+                           placeholder="产品点击用户数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">点击用户占比</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.clickProductUserRate"
+                           placeholder="点击用户占比"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">产品点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.productClick"
+                           placeholder="产品点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">人均产品点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.percapitaProductClick"
+                           placeholder="人均产品点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblH5ConversionReport.newPhoneRate"
+                           placeholder=""/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/sys/tblh5conversionreport.js?_${.now?long}"></script>
+</body>
+</html>

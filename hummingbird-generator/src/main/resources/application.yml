@@ -1,0 +1,49 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /hummingbird-generator
+
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #MySQL配置
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://rm-wz9nuc6v5vrr75h9xgo.mysql.rds.aliyuncs.com:3306/debit?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: debit_root
+    password: -1*YJfdx
+    #oracle配置
+#    driverClassName: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:@192.168.10.10:1521:helowin
+#    username: hummingbird
+#    password: 123456
+    #SQLServer配置
+#    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#    url: jdbc:sqlserver://192.168.10.10:1433;DatabaseName=hummingbird_security
+#    username: sa
+#    password: 123456
+    #PostgreSQL配置
+#    driverClassName: org.postgresql.Driver
+#    url: jdbc:postgresql://192.168.10.10:5432/hummingbird_security
+#    username: postgres
+#    password: 123456
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+
+mybatis:
+  mapperLocations: classpath:mapper/**/*.xml
+
+
+pagehelper:
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+
+#指定数据库，可选值有【mysql、oracle、sqlserver、postgresql】
+hummingbird:
+  database: mysql

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>按钮管理</title>
+		<#include "/header.html">
+		<script src="${request.contextPath}/statics/libs/ajaxupload.js"></script>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+<div class="form-group" v-show="showList">
+		  		  	  		  			  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.iconUrl" @keyup.enter="query" placeholder="图标url">
+	  </div>
+	   	  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.iconMsg" @keyup.enter="query" placeholder="图标图片">
+	  </div>
+	   	  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.orderNum" @keyup.enter="query" placeholder="排序">
+	  </div>
+	   	  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.jumpUrl" @keyup.enter="query" placeholder="跳转url">
+	  </div>
+	   	  	   </div>
+ <div style="clear:both"></div>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-default" @click="query"><i class="fa fa-search"></i>&nbsp;查询</a></a>
+            <a class="btn btn-default" @click="e_export"><i class="fa fa-plus"></i>&nbsp;导出</a></a>
+			<#if shiro.hasPermission("sys:tbliconconfig:save")>
+            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			</#if>
+			<#if shiro.hasPermission("sys:tbliconconfig:update")>
+            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			</#if>
+			<#if shiro.hasPermission("sys:tbliconconfig:delete")>
+            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			</#if>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+																		  															  				                        															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">图标url</div>
+                        <div class="col-sm-6">
+                            <input type="text" readonly="readonly"  class="form-control" v-model="tblIconConfig.iconUrl" placeholder="图标url"/>
+                        </div>
+                            <div class="col-sm-3">
+                  <a class="btn btn-primary" id="upload"><i class="fa fa-plus"></i>&nbsp;上传图片</a>
+                </div>
+                    </div>
+                                         															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">图标图片</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="tblIconConfig.iconMsg" placeholder="图标图片"/>
+                        </div>
+                    </div>
+                                         															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">排序</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="tblIconConfig.orderNum" placeholder="排序"/>
+                        </div>
+                    </div>
+                                         															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">跳转url</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="tblIconConfig.jumpUrl" placeholder="跳转url"/>
+                        </div>
+                    </div>
+                                         							            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/sys/tbliconconfig.js?_${.now?long}"></script>
+</body>
+</html>

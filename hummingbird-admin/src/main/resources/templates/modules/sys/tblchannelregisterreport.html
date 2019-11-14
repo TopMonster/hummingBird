@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <#include "/header.html">
+        </head>
+<body>
+<div id="rrapp" v-cloak>
+    <div class="form-group">
+        <div class="form-group col-sm-2">
+            <input id="statDateStart" type="text" class="form-control" v-model="q.statDateStart"
+                   @keyup.enter="query" placeholder="统计开始日期">
+        </div>
+        <div class="form-group col-sm-2">
+            <input id="statDateEnd" type="text" class="form-control" v-model="q.statDateEnd"
+                   @keyup.enter="query" placeholder="统计结束日期">
+        </div>
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.channelType" @keyup.enter="query" placeholder="渠道类型">
+        </div>
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.channelName" @keyup.enter="query" placeholder="渠道名称">
+        </div>
+        <div class="form-group col-sm-2">
+            <select type="text" class="form-control"
+                    v-model="q.business" @keyup.enter="query" placeholder="所属商务">
+                <option value="">所属商务</option>
+                <option v-for="(item,index) in businessUserList"
+                        :value="item.username">{{ item.username }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-default" @click="query"><i class="fa fa-search"></i>&nbsp;查询</a></a>
+            <a class="btn btn-default" @click="e_export"><i class="fa fa-plus"></i>&nbsp;导出</a></a>
+            <#if shiro.hasPermission("sys:tblchannelregisterreport:update")>
+                <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            </#if>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">渠道反馈点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblChannelRegisterReport.channelFeedbackClick" placeholder="渠道反馈点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">扣量开关</div>
+                <div class="col-sm-10">
+                    <select type="text" class="form-control"
+                            v-model="tblChannelRegisterReport.deductSwitch" placeholder="扣量开关">
+                        <option value="1">开</option>
+                        <option value="0">关</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">扣量比例</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblChannelRegisterReport.deductRate" placeholder="扣量比例"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/sys/tblchannelregisterreport.js?_${.now?long}"></script>
+</body>
+</html>

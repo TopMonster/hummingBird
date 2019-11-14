@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>产品收入报表统计</title>
+    <#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+		<div class="form-group" v-show="showList">
+			<div class="form-group col-sm-2">
+			<input id="statDateStart" type="text" class="form-control" v-model="q.statDateStart"
+					@keyup.enter="query" placeholder="统计开始日期">
+			</div>
+			<div class="form-group col-sm-2">
+			<input id="statDateEnd" type="text" class="form-control" v-model="q.statDateEnd"
+					@keyup.enter="query" placeholder="统计结束日期">
+			</div>
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.productName"
+					@keyup.enter="query" placeholder="产品名称">
+			</div>
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.productType"
+					@keyup.enter="query" placeholder="产品类型">
+			</div>
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.productCode"
+					   @keyup.enter="query" placeholder="产品编码">
+			</div>
+		</div>
+		<div style="clear:both"></div>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-default" @click="query"><i class="fa fa-search"></i>&nbsp;查询</a></a>
+            <a class="btn btn-default" @click="e_export"><i class="fa fa-plus"></i>&nbsp;导出</a></a>
+			<#if shiro.hasPermission("sys:tblproductrevenuereport:update")>
+				<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			</#if>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2 control-label">统计日期</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.statDate" placeholder="统计日期"
+							disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">产品名称</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.productName" placeholder="产品名称" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">产品类型</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.productType" placeholder="产品类型" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">产品编码</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.productCode" placeholder="产品编码" disabled="disabled"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">产品总点击</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.totalProductClick"
+							placeholder="产品总点击" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">首页货架页点击</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.indexShelfClick"
+							placeholder="首页货架页点击" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">首页推荐位点击</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.indexRecommandClick"
+							placeholder="首页推荐位点击" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">榜单点击</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.rankClick" placeholder="榜单点击" disabled="disabled"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">大全点击</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.daquanClick" placeholder="大全点击" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">banner点击数</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.bannerClick"
+							placeholder="banner点击数" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">CPA</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.cpa" placeholder="CPA" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">CPS</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.cps" placeholder="CPS" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">CPC</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.cpc" placeholder="CPC" disabled="disabled"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">甲方反馈注册数</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.feedbackRegister"
+							placeholder="甲方反馈注册数" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">CPC手动录入数</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.cpcInput" placeholder="CPC手动录入数" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">甲方反馈放款额</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.feedbackLoanAmount"
+							placeholder="甲方反馈放款额" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">点击到注册转化率</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.clickRegisterRate"
+							placeholder="点击到注册转化率" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">收入</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.profits" placeholder="收入" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">点击价值</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control"
+							v-model="tblProductRevenueReport.clickValue" placeholder="点击价值" disabled="disabled" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label"></div>
+					<input type="button" class="btn btn-primary" @click="saveOrUpdate"
+						value="确定" /> &nbsp;&nbsp;<input type="button"
+						class="btn btn-warning" @click="reload" value="返回" />
+				</div>
+			</form>
+		</div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/sys/tblproductrevenuereport.js?_${.now?long}"></script>
+</body>
+</html>

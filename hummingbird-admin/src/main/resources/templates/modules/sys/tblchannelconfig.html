@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>渠道配置</title>
+    <#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div class="form-group" v-show="showList">
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.channelName"
+                   @keyup.enter="query" placeholder="渠道名称">
+        </div>
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.channelType"
+                   @keyup.enter="query" placeholder="渠道类型">
+        </div>
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.channelCode"
+                   @keyup.enter="query" placeholder="渠道编码">
+        </div>
+        <div class="form-group col-sm-2">
+            <select type="text" class="form-control" @keyup.enter="query" v-model="q.channelH5Style"
+                    placeholder="渠道推广H5风格">
+                <option value="">渠道推广H5风格</option>
+                <option value="taobaotubie">淘宝土鳖版</option>
+                <option value="yuguedu">预估额度版</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-2">
+            <select type="text" class="form-control"
+                    v-model="q.business" @keyup.enter="query" placeholder="所属商务">
+                <option value="">所属商务</option>
+                <option v-for="(item,index) in businessUserList"
+                        :value="item.username">{{ item.username }}
+                </option>
+            </select>
+        </div>
+        <!-- <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.cpc"
+                @keyup.enter="query" placeholder="CPC单价">
+        </div>
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.cpa"
+                @keyup.enter="query" placeholder="推广CPA价格">
+        </div>
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.cps"
+                @keyup.enter="query" placeholder="CPS比例">
+        </div>
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.marktingUrl"
+                @keyup.enter="query" placeholder="渠道推广链接">
+        </div>
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.deptId"
+                @keyup.enter="query" placeholder="所属部门id">
+        </div> -->
+    </div>
+    <div style="clear:both"></div>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-default" @click="query"><i class="fa fa-search"></i>&nbsp;查询</a></a>
+            <a class="btn btn-default" @click="e_export"><i class="fa fa-plus"></i>&nbsp;导出</a></a>
+            <#if shiro.hasPermission("sys:tblchannelconfig:save")>
+            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+        </#if>
+        <#if shiro.hasPermission("sys:tblchannelconfig:update")>
+        <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+    </#if>
+    <#if shiro.hasPermission("sys:tblchannelconfig:delete")>
+    <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+</#if>
+</div>
+
+<table id="jqGrid"></table>
+
+<div id="jqGridPager"></div>
+</div>
+
+<div v-show="!showList" class="panel panel-default">
+    <div class="panel-heading">{{title}}</div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-2 control-label">渠道名称</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.channelName" placeholder="渠道名称"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">渠道类型</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.channelType" placeholder="渠道类型"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">渠道编码</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.channelCode" placeholder="渠道编码"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">渠道状态</div>
+            <div class="col-sm-10">
+                <select type="text" class="form-control"
+                        v-model="tblChannelConfig.state" placeholder="渠道状态">
+                    <option value="0">上线</option>
+                    <option value="1">下线</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">渠道推广H5风格</div>
+            <div class="col-sm-10">
+                <select type="text" class="form-control"
+                        v-model="tblChannelConfig.channelH5Style" placeholder="渠道推广H5风格">
+                    <option value="taobaotubie">淘宝土鳖版</option>
+                    <option value="yuguedu">预估额度版</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">所属商务</div>
+            <div class="col-sm-10">
+                <select type="text" class="form-control"
+                        v-model="tblChannelConfig.business" placeholder="所属商务">
+                    <option v-for="(item,index) in businessUserList"
+                            :value="item.username">{{ item.username }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">CPC单价</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.cpc" placeholder="CPC单价"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">推广CPA价格</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.cpa" placeholder="推广CPA价格"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">CPS比例</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.cps" placeholder="CPS比例"/>
+            </div>
+        </div>
+        <div class="form-group"  >
+            <div class="col-sm-2 control-label">登录账号用户名</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.username" placeholder="登录账号用户名"/>
+            </div>
+        </div>
+        <div class="form-group" >
+            <div class="col-sm-2 control-label">登录账号密码</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.password" placeholder="登录账号密码"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">下载链接</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.appDownloadUrl" placeholder="下载链接" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">扣量比例</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.deductRate" placeholder="扣量比例" />
+            </div>
+        </div>
+
+
+        <!-- <div class="form-group">
+            <div class="col-sm-2 control-label">渠道推广链接</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                    v-model="tblChannelConfig.marktingUrl" placeholder="渠道推广链接" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">所属部门id</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"
+                       v-model="tblChannelConfig.deptId" placeholder="所属部门id"/>
+            </div>
+        </div>-->
+
+
+        <div class="form-group">
+            <div class="col-sm-2 control-label"></div>
+            <input type="button" class="btn btn-primary" @click="saveOrUpdate"
+                   value="确定"/> &nbsp;&nbsp;<input type="button"
+                                                   class="btn btn-warning" @click="reload" value="返回"/>
+        </div>
+    </form>
+</div>
+</div>
+<script type="text/javascript" src="${request.contextPath}/statics/plugins/cilpboard/clipboard.min.js"></script>
+<script src="${request.contextPath}/statics/js/modules/sys/tblchannelconfig.js?_${.now?long}"></script>
+</body>
+</html>

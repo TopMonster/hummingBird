@@ -1,0 +1,38 @@
+package ${package}.${moduleName}.entity;
+
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import cn.afterturn.easypoi.excel.annotation.Excel;
+import lombok.Data;
+
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Data
+@TableName("${tableName}")
+@ApiModel(value = "${comments}")
+public class ${className}Entity implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+#foreach ($column in $columns)
+	/**
+	 * $column.comments
+	 */
+	#if($column.columnName == $pk.columnName)
+@TableId
+	#end
+@Excel(name = "$column.comments" #if($column.columnName == "created_time" || $column.columnName == "updated_time") ,  format = "yyyy-MM-dd HH:mm:ss", width = 20 #end)
+private $column.attrType $column.attrname;
+#end
+
+}

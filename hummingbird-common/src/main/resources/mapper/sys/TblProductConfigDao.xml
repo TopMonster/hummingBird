@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.hummingbird.common.dao.TblProductConfigDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.hummingbird.common.entity.TblProductConfigEntity" id="tblProductConfigMap">
+        <result property="id" column="ID"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="productType" column="product_type"/>
+        <result property="productName" column="product_name"/>
+        <result property="productCode" column="product_code"/>
+        <result property="productLogo" column="product_logo"/>
+        <result property="productUrl" column="product_url"/>
+        <result property="productTag" column="product_tag"/>
+        <result property="productRate" column="product_rate"/>
+        <result property="productLimit" column="product_limit"/>
+        <result property="loanSucMsg" column="loan_suc_msg"/>
+        <result property="loanNum" column="loan_num"/>
+        <result property="slogan" column="slogan"/>
+        <result property="showTerminal" column="show_terminal"/>
+        <result property="partnerName" column="partner_name"/>
+        <result property="business" column="business"/>
+        <result property="cpa" column="cpa"/>
+        <result property="cpc" column="cpc"/>
+        <result property="cps" column="cps"/>
+        <result property="description" column="description"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="listTblProductConfigEntity" parameterType="String" resultType="io.hummingbird.common.entity.TblProductConfigEntity">
+        select distinct(tpc.ID),tpsr.order_num,tpc.*
+        from tbl_product_config as tpc
+        LEFT JOIN tbl_product_shelf_relation as tpsr on tpsr.product_code = tpc.product_code
+        LEFT JOIN tbl_product_revenue_report as tprr on tprr.product_code = tpc.product_code
+        where tpsr.shelf_code = #{shelfCode} and tpc.status = 1
+        ORDER BY tpsr.order_num ASC
+    </select>
+
+</mapper>

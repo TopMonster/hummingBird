@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>流量路径统计报表</title>
+    <#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak v-show="showList">
+    <div class="form-group">
+        <div class="form-group col-sm-2">
+            <input id="statDateStart" type="text" class="form-control" v-model="q.statDateStart"
+                   @keyup.enter="query" placeholder="统计开始日期">
+        </div>
+        <div class="form-group col-sm-2">
+            <input id="statDateEnd" type="text" class="form-control" v-model="q.statDateEnd"
+                   @keyup.enter="query" placeholder="统计结束日期">
+        </div>
+    </div>
+    <div style="clear:both"></div>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-default" @click="query"><i class="fa fa-search"></i>&nbsp;查询</a></a>
+            <a class="btn btn-default" @click="e_export"><i class="fa fa-plus"></i>&nbsp;导出</a></a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">统计日期</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.statDate" placeholder="统计日期"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">打开appUV</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.openAppUv"
+                           placeholder="打开appUV"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">首页UV</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.indexPageUv"
+                           placeholder="首页UV"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">大全页UV</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.daquanPageUv"
+                           placeholder="大全页UV"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">榜单页UV</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.rankPageUv"
+                           placeholder="榜单页UV"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">我的页UV</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.minePageUv"
+                           placeholder="我的页UV"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">首页点击用户数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.indexPageClickUser"
+                           placeholder="首页点击用户数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">首页点击用户占比</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.indexPageClickUserRate"
+                           placeholder="首页点击用户占比"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">首页点击产品数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.indexPageProductClick"
+                           placeholder="首页点击产品数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">首页人均点击产品数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           v-model="tblFlowRaodmapReport.indexPagePercapitaProductClick" placeholder="首页人均点击产品数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">大全页点击用户数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.daquanPageClickUser"
+                           placeholder="大全页点击用户数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">大全点击用户占比</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.daquanPageClickUserRate"
+                           placeholder="大全点击用户占比"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">大全产品点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.daquanPageProductClick"
+                           placeholder="大全产品点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">大全人均点击产品数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           v-model="tblFlowRaodmapReport.daquanPagePercapitaProductClick" placeholder="大全人均点击产品数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">榜单点击用户数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.rankPageClickUser"
+                           placeholder="榜单点击用户数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">榜单点击用户占比</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.rankPageClickUserRate"
+                           placeholder="榜单点击用户占比"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">榜单产品点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.rankPageProductClick"
+                           placeholder="榜单产品点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">榜单人均点击产品数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.rankPagePercapitaProductClick"
+                           placeholder="榜单人均点击产品数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">banner1点击率</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.banner1ClickRate"
+                           placeholder="banner1点击率"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">banner2点击率</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.banner2ClickRate"
+                           placeholder="banner2点击率"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">banner3点击率</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.banner3ClickRate"
+                           placeholder="banner3点击率"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">ICON1点击率</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.icon1ClickRate"
+                           placeholder="ICON1点击率"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">ICON2点击率</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.icon2ClickRate"
+                           placeholder="ICON2点击率"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">ICON3点击率</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.icon3ClickRate"
+                           placeholder="ICON3点击率"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">ICON5点击率</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblFlowRaodmapReport.icon4ClickRate"
+                           placeholder="ICON5点击率"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/sys/tblflowraodmapreport.js?_${.now?long}"></script>
+</body>
+</html>

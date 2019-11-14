@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>整体收入统计报表</title>
+    <#include "/header.html">
+        </head>
+<body>
+<div id="rrapp" v-cloak v-show="showList">
+    <div class="form-group">
+        <div class="form-group col-sm-2">
+			<input id="statDateStart" type="text" class="form-control" v-model="q.statDateStart"
+					@keyup.enter="query" placeholder="统计开始日期">
+			</div>
+			<div class="form-group col-sm-2">
+			<input id="statDateEnd" type="text" class="form-control" v-model="q.statDateEnd"
+					@keyup.enter="query" placeholder="统计结束日期">
+			</div>
+    </div>
+    <div style="clear:both"></div>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-default" @click="query"><i class="fa fa-search"></i>&nbsp;查询</a></a>
+            <a class="btn btn-default" @click="e_export"><i class="fa fa-plus"></i>&nbsp;导出</a></a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">统计日期</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.statDate"
+                           placeholder="统计日期"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">首页UV</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.indexPageUv"
+                           placeholder="首页UV"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">新用户UV</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.newUserUv"
+                           placeholder="新用户UV"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">点击用户数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.userClickNum"
+                           placeholder="点击用户数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">点击用户占比</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.clickUserRate"
+                           placeholder="点击用户占比"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">产品总点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.totalProductClick"
+                           placeholder="产品总点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">人均产品点击数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.percapitaProductClick"
+                           placeholder="人均产品点击数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">产品总CPA</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.totalProductCpa"
+                           placeholder="产品总CPA"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">贷超总收入</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.totalRevenue"
+                           placeholder="贷超总收入"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">首页UV价值</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.indexUvValue"
+                           placeholder="首页UV价值"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">用户价值</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.userValue"
+                           placeholder="用户价值"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">产品点击价值</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.productClickValue"
+                           placeholder="产品点击价值"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">推广H5总UV</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.marktingH5PageUv"
+                           placeholder="推广H5总UV"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">推广H5总注册数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.totalMarktingRegister"
+                           placeholder="推广H5总注册数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">推广H5反馈注册数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.totalFeedbackRegister"
+                           placeholder="推广H5反馈注册数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">推广总激活数</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.totalDeviceActive"
+                           placeholder="推广总激活数"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">推广H5总消耗</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.totalPromotionCost"
+                           placeholder="推广H5总消耗"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">注册成本</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.registerCost"
+                           placeholder="注册成本"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">激活成本</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.activeCost"
+                           placeholder="激活成本"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">贷超毛利</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.profits"
+                           placeholder="贷超毛利"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">单日ROI</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="tblOverallRevenueReport.roi" placeholder="单日ROI"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/sys/tbloverallrevenuereport.js?_${.now?long}"></script>
+</body>
+</html>

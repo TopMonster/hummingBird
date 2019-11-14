@@ -1,0 +1,39 @@
+package ${package}.${moduleName}.service.impl;
+
+import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import java.util.Map;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import ${mainPath}.common.utils.PageUtils;
+import ${mainPath}.common.utils.Query;
+
+import ${package}.${moduleName}.dao.${className}Dao;
+import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.service.${className}Service;
+import io.hummingbird.common.utils.Constant;
+
+
+@Service("${classname}Service")
+public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${className}Entity> implements ${className}Service {
+
+    @Override
+    public PageUtils queryPage(Map<String, Object> params) {
+     QueryWrapper<${className}Entity> warpper=new QueryWrapper<${className}Entity>();
+     #foreach($column in $columns)
+      String ${column.attrname} =(String)params.get("${column.attrname}");
+      if(!StringUtils.isEmpty(${column.attrname} )){
+			 warpper.likeRight("${column.columnName} ", ${column.attrname} );
+		 }
+     #end
+      warpper.apply(params.get(Constant.SQL_FILTER) != null,(String) params.get(Constant.SQL_FILTER));
+        IPage<${className}Entity> page = this.page(
+                new Query<${className}Entity>().getPage(params),
+               warpper
+        );
+
+        return new PageUtils(page);
+    }
+
+}

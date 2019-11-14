@@ -1,0 +1,151 @@
+$(function () {
+    $("#jqGrid").jqGrid({
+        url: baseURL + '${moduleName}/${pathName}/list',
+        datatype: "json",
+        colModel: [			
+#foreach($column in $columns)
+#if($column.columnName == $pk.columnName)
+			{ label: '${column.attrname}', name: '${column.attrname}', index: '${column.columnName}', width: 50, key: true },
+#else
+			{ label: '${column.comments}', name: '${column.attrname}', index: '${column.columnName}', width: 100 }#if($velocityCount != $columns.size()), #end
+			
+#end			
+#end
+        ],
+		viewrecords: true,
+        height: 385,
+        rowNum: 10,
+		rowList : [10,30,50],
+        rownumbers: true, 
+        rownumWidth: 25, 
+        autowidth:true,
+        #if($columns.size()>=10)
+          shrinkToFit:false,
+         #end
+        multiselect: true,
+        pager: "#jqGridPager",
+        jsonReader : {
+            root: "page.list",
+            page: "page.currPage",
+            total: "page.totalPage",
+            records: "page.totalCount"
+        },
+        prmNames : {
+            page:"page", 
+            rows:"limit", 
+            order: "order"
+        },
+        gridComplete:function(){
+        	//隐藏grid底部滚动条
+        	 #if($columns.size()>=10)
+         //$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
+         #end
+        	
+        }
+    });
+});
+
+var vm = new Vue({
+	el:'#rrapp',
+	data:{
+	    q:{
+	    #foreach($column in $columns)
+	      #if($column.columnName != $pk.columnName)
+	               ${column.attrname} : null #if($velocityCount != $columns.size()), #end
+	       #end
+         #end
+	    },
+		showList: true,
+		title: null,
+		${classname}: {}
+	},
+	methods: {
+		query: function () {
+			vm.reload();
+		},
+		e_export: function () {
+			var url = "${moduleName}/${pathName}/export?"+ vm.foramtQueryData(vm.q);
+			window.location.href=baseURL + url;
+			 
+		},
+		add: function(){
+			vm.showList = false;
+			vm.title = "新增";
+			vm.${classname} = {};
+		},
+		update: function (event) {
+			var $pk.attrname = getSelectedRow();
+			if($pk.attrname == null){
+				return ;
+			}
+			vm.showList = false;
+            vm.title = "修改";
+            
+            vm.getInfo(${pk.attrname})
+		},
+		saveOrUpdate: function (event) {
+			var url = vm.${classname}.${pk.attrname} == null ? "${moduleName}/${pathName}/save" : "${moduleName}/${pathName}/update";
+			$.ajax({
+				type: "POST",
+			    url: baseURL + url,
+                contentType: "application/json",
+			    data: JSON.stringify(vm.${classname}),
+			    success: function(r){
+			    	if(r.code === 0){
+						alert('操作成功', function(index){
+							vm.reload();
+						});
+					}else{
+						alert(r.msg);
+					}
+				}
+			});
+		},
+		del: function (event) {
+			var ${pk.attrname}s = getSelectedRows();
+			if(${pk.attrname}s == null){
+				return ;
+			}
+			
+			confirm('确定要删除选中的记录？', function(){
+				$.ajax({
+					type: "POST",
+				    url: baseURL + "${moduleName}/${pathName}/delete",
+                    contentType: "application/json",
+				    data: JSON.stringify(${pk.attrname}s),
+				    success: function(r){
+						if(r.code == 0){
+							alert('操作成功', function(index){
+								$("#jqGrid").trigger("reloadGrid");
+							});
+						}else{
+							alert(r.msg);
+						}
+					}
+				});
+			});
+		},
+		getInfo: function(${pk.attrname}){
+			$.get(baseURL + "${moduleName}/${pathName}/info/"+${pk.attrname}, function(r){
+                vm.${classname} = r.${classname};
+            });
+		},
+		reload: function (event) {
+			vm.showList = true;
+			var page = $("#jqGrid").jqGrid('getGridParam','page');
+			$("#jqGrid").jqGrid('setGridParam',{
+                postData:{ #foreach($column in $columns) '${column.attrname}' : vm.q.${column.attrname} #if($velocityCount != $columns.size()), #end #end},
+                page:page
+            }).trigger("reloadGrid");
+		},
+		 foramtQueryData(json) {
+      var arr = []
+      for (let i in json) {
+        if (json[i]) {
+          arr.push(i + '=' + json[i])
+        }
+      }
+      return arr.join('&')
+    }
+	}
+});

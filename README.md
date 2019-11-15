@@ -24,7 +24,7 @@
 
 **项目结构** 
 ```
-hummingbird-security
+hummingbird
 ├─hummingbird-common     公共模块
 │ 
 ├─hummingbird-admin      管理后台
@@ -113,5 +113,6 @@ hummingbird-security
 - 需要配置【hummingbird.cluster=true】，表示开启集群环境
 
 <br>
+
 
 <br>

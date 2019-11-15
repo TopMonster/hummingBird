@@ -1,5 +1,5 @@
-**蜂鸟项目说明** 
-- 基于SpringBoot、MyBatis、Shiro框架，开发的一套系统
+**蜂鸟系统说明** 
+- 基于SpringBoot、MyBatis、Shiro框架开发的一套管理系统
 <br>
 
 **具有如下特点** 

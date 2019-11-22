@@ -9,8 +9,8 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     #MySQL配置
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://rm-wz9nuc6v5vrr75h9xgo.mysql.rds.aliyuncs.com:3306/debit?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    username: debit_root
+    url: jdbc:mysql://120.79.4.197:3306/hummingbird?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
     password: -1*YJfdx
     #oracle配置
 #    driverClassName: oracle.jdbc.OracleDriver

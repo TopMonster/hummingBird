@@ -85,7 +85,7 @@ hummingbird
 - 创建数据库hummingbird，数据库编码为UTF-8
 - 执行db/mysql.sql文件，初始化数据【按需导入表结构及数据】
 - 修改application-dev.yml文件，更新MySQL账号和密码
-- 在hummingbird-security目录下，执行mvn clean install
+- 在hummingbird目录下，执行mvn clean install
 <br>
 
 - Eclipse、IDEA运行AdminApplication.java，则可启动项目【hummingbird-admin】
@@ -113,5 +113,10 @@ hummingbird
 - 需要配置【hummingbird.cluster=true】，表示开启集群环境
 
 <br>
+**后台管理系统效果图：** 
+![Image](images/admin_login.png)
+
+![Image](images/admin_index.png)
+
 
 <br>

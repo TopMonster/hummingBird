@@ -1,5 +1,5 @@
-**蜂鸟系统说明** 
-- 基于SpringBoot、MyBatis、Shiro框架开发的一套管理系统
+**蜂鸟项目说明** 
+- 基于SpringBoot、MyBatis、Shiro框架，开发的一套系统
 <br>
 
 **具有如下特点** 
@@ -82,7 +82,7 @@ hummingbird
  **本地部署**
 - 通过git下载源码
 - idea、eclipse需安装lombok插件，不然会提示找不到entity的get set方法
-- 创建数据库hummingbird_security，数据库编码为UTF-8
+- 创建数据库hummingbird，数据库编码为UTF-8
 - 执行db/mysql.sql文件，初始化数据【按需导入表结构及数据】
 - 修改application-dev.yml文件，更新MySQL账号和密码
 - 在hummingbird-security目录下，执行mvn clean install
@@ -113,6 +113,5 @@ hummingbird
 - 需要配置【hummingbird.cluster=true】，表示开启集群环境
 
 <br>
-
 
 <br>

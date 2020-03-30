@@ -42,6 +42,7 @@
         <joda.time.version>2.9.9</joda.time.version>
         <lombok.version>1.18.4</lombok.version>
         <swagger.version>2.7.0</swagger.version>
+        <jwt.version>0.7.0</jwt.version>
     </properties>
 
     <dependencies>

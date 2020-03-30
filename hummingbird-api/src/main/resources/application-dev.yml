@@ -15,9 +15,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://120.79.4.197:3306/hummingbird?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      url: jdbc:mysql://47.92.38.109:3306/hummingbird?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
       username: root
-      password: -1*YJfdx
+      password: Root@1234
       initial-size: 10
       max-active: 100
       min-idle: 10

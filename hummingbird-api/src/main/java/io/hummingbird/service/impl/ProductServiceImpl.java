@@ -15,29 +15,26 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import io.hummingbird.entity.ProductEntity;
-import io.hummingbird.service.ProductService;
 import io.hummingbird.common.dao.TblProductConfigDao;
 import io.hummingbird.common.entity.TblProductConfigEntity;
+import io.hummingbird.entity.ProductEntity;
+import io.hummingbird.service.ProductService;
 
-/**
- * @author caz
- */
 @Service("productService")
-public class ProductServiceImpl extends ServiceImpl<TblProductConfigDao,TblProductConfigEntity> implements ProductService {
+public class ProductServiceImpl extends ServiceImpl<TblProductConfigDao, TblProductConfigEntity>
+		implements ProductService {
 
 	@Autowired
 	private TblProductConfigDao tblProductConfigDao;
 
-	 
 	@Override
 	public TblProductConfigEntity listByCode(String productCode) {
-		return tblProductConfigDao
-				.selectOne(new QueryWrapper<TblProductConfigEntity>().eq("product_code", productCode).orderByDesc("created_time"));
+		return tblProductConfigDao.selectOne(
+				new QueryWrapper<TblProductConfigEntity>().eq("product_code", productCode).orderByDesc("created_time"));
 	}
 
 	@Override
-	public JSONObject listByShelfCode(String shelfCodes,String osType) {
+	public JSONObject listByShelfCode(String shelfCodes, String osType) {
 		JSONObject jsonObject = new JSONObject();
 		if (StringUtils.isBlank(shelfCodes)) {
 			return jsonObject;
@@ -49,23 +46,24 @@ public class ProductServiceImpl extends ServiceImpl<TblProductConfigDao,TblProdu
 			jsonObject.put(shelfCode, array);
 
 			List<TblProductConfigEntity> tblProductConfigEntityList = baseMapper.listTblProductConfigEntity(shelfCode);
-			//最终要返回的产品List
+			// 最终要返回的产品List
 			List<TblProductConfigEntity> productConfigEntityList = new ArrayList<>();
 			List<TblProductConfigEntity> productConfigEntityListTemp = new ArrayList<>();
 			productConfigEntityListTemp.add(tblProductConfigEntityList.get(0));
 			for (int i = 1; i < tblProductConfigEntityList.size(); i++) {
-				if (productConfigEntityListTemp.get(0).getOrderNum() == tblProductConfigEntityList.get(i).getOrderNum()) {
+				if (productConfigEntityListTemp.get(0).getOrderNum() == tblProductConfigEntityList.get(i)
+						.getOrderNum()) {
 					productConfigEntityListTemp.add(tblProductConfigEntityList.get(i));
-				}else {
-					//打乱productConfigEntityListTemp
+				} else {
+					// 打乱productConfigEntityListTemp
 					Collections.shuffle(productConfigEntityListTemp);
 					productConfigEntityList.addAll(productConfigEntityListTemp);
 					productConfigEntityListTemp.clear();
 					productConfigEntityListTemp.add(tblProductConfigEntityList.get(i));
 				}
 			}
-			//加入最后一个
-			productConfigEntityList.add(tblProductConfigEntityList.get(tblProductConfigEntityList.size()-1));
+			// 加入最后一个
+			productConfigEntityList.add(tblProductConfigEntityList.get(tblProductConfigEntityList.size() - 1));
 
 			for (TblProductConfigEntity produtConfig : productConfigEntityList) {
 				if (ifShow(osType, produtConfig)) {
@@ -81,13 +79,13 @@ public class ProductServiceImpl extends ServiceImpl<TblProductConfigDao,TblProdu
 
 	/**
 	 * 根据终端类型，判断该产品是否应该展示
+	 * 
 	 * @param osType
 	 * @param tblProductConfigEntity
 	 * @return
 	 */
 	private boolean ifShow(String osType, TblProductConfigEntity tblProductConfigEntity) {
-		return null != tblProductConfigEntity
-                && (tblProductConfigEntity.getShowTerminal().equalsIgnoreCase(osType)
-                    || "ALL".equalsIgnoreCase(tblProductConfigEntity.getShowTerminal()));
+		return null != tblProductConfigEntity && (tblProductConfigEntity.getShowTerminal().equalsIgnoreCase(osType)
+				|| "ALL".equalsIgnoreCase(tblProductConfigEntity.getShowTerminal()));
 	}
 }

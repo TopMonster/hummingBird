@@ -13,8 +13,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import io.hummingbird.common.annotation.DataFilter;
 import io.hummingbird.common.dao.TblProductConfigDao;
-import io.hummingbird.common.entity.BusinessDataFilterType;
 import io.hummingbird.common.entity.TblProductConfigEntity;
+import io.hummingbird.common.enums.BusinessDataFilterType;
 import io.hummingbird.common.enums.ProductStatusEnum;
 import io.hummingbird.common.utils.DataFilterUtil;
 import io.hummingbird.common.utils.PageUtils;

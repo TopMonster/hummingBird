@@ -21,18 +21,13 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import io.hummingbird.common.annotation.DataFilter;
-import io.hummingbird.common.entity.SysRoleEntity;
 import io.hummingbird.common.entity.SysUserEntity;
 import io.hummingbird.common.exception.RRException;
 import io.hummingbird.common.utils.Constant;
 import io.hummingbird.modules.sys.service.SysDeptService;
 import io.hummingbird.modules.sys.service.SysRoleDeptService;
-import io.hummingbird.modules.sys.service.SysRoleService;
 import io.hummingbird.modules.sys.service.SysUserRoleService;
 import io.hummingbird.modules.sys.shiro.ShiroUtils;
 
@@ -48,8 +43,6 @@ public class DataFilterAspect {
 	private SysDeptService sysDeptService;
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
-	@Autowired
-	private SysRoleService sysRoleService;
 	@Autowired
 	private SysRoleDeptService sysRoleDeptService;
 
@@ -67,11 +60,6 @@ public class DataFilterAspect {
 			if (user.getUserId() != Constant.SUPER_ADMIN) {
 				Map map = (Map) params;
 				map.put(Constant.SQL_FILTER, getSQLFilter(user, point));
-				
-				if(containBusinessRole(user.getUserId())){
-					map.put(Constant.PRODUCT_BUSINESS_FILTER, getProductBusinessSQLFilter(user, point));
-					map.put(Constant.CHANNEL_BUSINESS_FILTER, getChannelBusinessSQLFilter(user, point));
-				}
 			}
 
 			return;
@@ -133,63 +121,5 @@ public class DataFilterAspect {
 
 		return sqlFilter.toString();
 	}
-	
-	private boolean containBusinessRole(Long userId){
-		// 商务方权限设置
-		List<SysRoleEntity> roleLit=getUseRoleList(userId);
-		if(CollectionUtils.isEmpty(roleLit)){
-			return false;
-		}
-		for (SysRoleEntity sysRoleEntity : roleLit) {
-			if(sysRoleEntity.getRoleName().equals("商务方")){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private List<SysRoleEntity> getUseRoleList(Long userId){
-		List<Long> roleIdList = sysUserRoleService.queryRoleIdList(userId);
-		if(CollectionUtils.isEmpty(roleIdList)){
-			return null;
-		}
-		return sysRoleService.list(new QueryWrapper<SysRoleEntity>().in("role_id", roleIdList));
-	}
-	
-	
-	private String getChannelBusinessSQLFilter(SysUserEntity user, JoinPoint point) {
-		String belongBusiness=user.getUsername();
-		MethodSignature signature = (MethodSignature) point.getSignature();
-		DataFilter dataFilter = signature.getMethod().getAnnotation(DataFilter.class);
-		// 获取表的别名
-		String tableAlias = dataFilter.tableAlias();
-		if (StringUtils.isNotBlank(tableAlias)) {
-			tableAlias += ".";
-		}
-		StringBuilder sqlFilter = new StringBuilder();
-		sqlFilter.append(" exists(select * from tbl_channel_config c where c.channel_code=");
-		sqlFilter.append(tableAlias);
-		sqlFilter.append("channel_code and c.business='");
-		sqlFilter.append(belongBusiness);
-		sqlFilter.append("')");
-		return sqlFilter.toString();
-	}
-	
-	private String getProductBusinessSQLFilter(SysUserEntity user, JoinPoint point) {
-		String belongBusiness=user.getUsername();
-		MethodSignature signature = (MethodSignature) point.getSignature();
-		DataFilter dataFilter = signature.getMethod().getAnnotation(DataFilter.class);
-		// 获取表的别名
-		String tableAlias = dataFilter.tableAlias();
-		if (StringUtils.isNotBlank(tableAlias)) {
-			tableAlias += ".";
-		}
-		StringBuilder sqlFilter = new StringBuilder();
-		sqlFilter.append(" exists(select * from tbl_product_config c where c.product_code=");
-		sqlFilter.append(tableAlias);
-		sqlFilter.append("product_code and c.business='");
-		sqlFilter.append(belongBusiness);
-		sqlFilter.append("')");
-		return sqlFilter.toString();
-	}
+
 }

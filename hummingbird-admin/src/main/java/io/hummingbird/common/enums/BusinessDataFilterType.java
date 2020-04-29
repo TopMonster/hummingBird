@@ -1,4 +1,4 @@
-package io.hummingbird.common.entity;
+package io.hummingbird.common.enums;
 /**
  * 商务方数据过滤类型  是需要根据产品或渠道
  * @author Administrator

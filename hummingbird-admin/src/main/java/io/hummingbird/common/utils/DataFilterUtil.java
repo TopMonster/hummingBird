@@ -2,7 +2,7 @@ package io.hummingbird.common.utils;
 
 import java.util.Map;
 
-import io.hummingbird.common.entity.BusinessDataFilterType;
+import io.hummingbird.common.enums.BusinessDataFilterType;
 
 public class DataFilterUtil {
 

@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.hummingbird.entity.UserEntity;
-import io.hummingbird.form.RegisterForm;
-import io.hummingbird.service.UserService;
+import io.hummingbird.common.entity.UserEntity;
 import io.hummingbird.common.utils.R;
 import io.hummingbird.common.validator.ValidatorUtils;
+import io.hummingbird.form.RegisterForm;
+import io.hummingbird.service.UserService;
 
 /**
  * 注册接口

@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import io.hummingbird.common.dao.UserDao;
+import io.hummingbird.common.entity.UserEntity;
 import io.hummingbird.common.exception.RRException;
 import io.hummingbird.common.validator.Assert;
-import io.hummingbird.dao.UserDao;
-import io.hummingbird.entity.UserEntity;
 import io.hummingbird.form.LoginForm;
 import io.hummingbird.service.UserService;
 

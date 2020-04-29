@@ -9,7 +9,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import io.hummingbird.annotation.LoginUser;
-import io.hummingbird.entity.UserEntity;
+import io.hummingbird.common.entity.UserEntity;
 import io.hummingbird.interceptor.AuthorizationInterceptor;
 
 /**
@@ -19,7 +19,6 @@ import io.hummingbird.interceptor.AuthorizationInterceptor;
  */
 @Component
 public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
-	 
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -36,7 +35,8 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
 			return null;
 		}
 		// 获取用户信息
-		//TblRegisterUserEntity user = registerUserService.queryByUserId((String) object);
+		// TblRegisterUserEntity user =
+		// registerUserService.queryByUserId((String) object);
 		return null;
 	}
 }

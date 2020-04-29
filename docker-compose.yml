@@ -1,13 +1,13 @@
 version: '2'
 services:
-  renren-admin:
-    image: renren/admin
+  hummingbird-admin:
+    image: hummingbird/admin
     ports:
       - "8080:8080"
     environment:
       - spring.profiles.active=dev
-  renren-api:
-    image: renren/api
+  hummingbird-api:
+    image: hummingbird/api
     ports:
       - "8081:8081"
     environment:

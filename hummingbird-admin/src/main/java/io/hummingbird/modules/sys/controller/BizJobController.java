@@ -35,7 +35,7 @@ import io.hummingbird.modules.sys.service.BizJobService;
  *
  * @author Top
  * @email xxx@gmail.com
- * @date 2020-09-16 09:26:51
+ * @date 2020-09-16 10:30:04
  */
 @RestController
 @RequestMapping("sys/bizjob")

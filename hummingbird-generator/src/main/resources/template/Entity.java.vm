@@ -1,8 +1,9 @@
-package ${package}.${moduleName}.entity;
+package ${entityPackage}.${entityModuleName}.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 #if(${hasBigDecimal})

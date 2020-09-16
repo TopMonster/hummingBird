@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ${mainPath}.common.utils.PageUtils;
 import ${mainPath}.common.utils.Query;
 
-import ${package}.${moduleName}.dao.${className}Dao;
-import ${package}.${moduleName}.entity.${className}Entity;
+import ${daoPackage}.${daoModuleName}.dao.${className}Dao;
+import ${entityPackage}.${entityModuleName}.entity.${className}Entity;
 import ${package}.${moduleName}.service.${className}Service;
 import io.hummingbird.common.utils.Constant;
 

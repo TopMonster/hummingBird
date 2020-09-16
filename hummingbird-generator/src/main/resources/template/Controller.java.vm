@@ -19,7 +19,7 @@ import cn.afterturn.easypoi.view.PoiBaseView;
 import org.springframework.util.StringUtils;
 import io.hummingbird.common.utils.Constant;
 
-import ${package}.${moduleName}.entity.${className}Entity;
+import ${entityPackage}.${entityModuleName}.entity.${className}Entity;
 import ${package}.${moduleName}.service.${className}Service;
 import ${mainPath}.common.utils.PageUtils;
 import ${mainPath}.common.utils.R;

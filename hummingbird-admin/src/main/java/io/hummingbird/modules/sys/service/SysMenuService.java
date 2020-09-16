@@ -11,7 +11,7 @@ package io.hummingbird.modules.sys.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import io.hummingbird.common.entity.SysMenuEntity;
+import io.hummingbird.common.core.entity.SysMenuEntity;
 
 import java.util.List;
 

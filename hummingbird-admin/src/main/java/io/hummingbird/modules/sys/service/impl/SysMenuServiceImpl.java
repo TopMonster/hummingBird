@@ -11,9 +11,9 @@ package io.hummingbird.modules.sys.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import io.hummingbird.common.dao.SysMenuDao;
-import io.hummingbird.common.entity.SysMenuEntity;
-import io.hummingbird.common.entity.SysRoleMenuEntity;
+import io.hummingbird.common.core.dao.SysMenuDao;
+import io.hummingbird.common.core.entity.SysMenuEntity;
+import io.hummingbird.common.core.entity.SysRoleMenuEntity;
 import io.hummingbird.common.utils.Constant;
 import io.hummingbird.modules.sys.service.SysMenuService;
 import io.hummingbird.modules.sys.service.SysRoleMenuService;

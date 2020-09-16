@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import io.hummingbird.common.annotation.DataFilter;
-import io.hummingbird.common.entity.SysUserEntity;
+import io.hummingbird.common.core.entity.SysUserEntity;
 import io.hummingbird.common.exception.RRException;
 import io.hummingbird.common.utils.Constant;
 import io.hummingbird.modules.sys.service.SysDeptService;

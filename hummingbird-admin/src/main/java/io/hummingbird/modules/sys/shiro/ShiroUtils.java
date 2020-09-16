@@ -13,7 +13,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
-import io.hummingbird.common.entity.SysUserEntity;
+import io.hummingbird.common.core.entity.SysUserEntity;
 import io.hummingbird.common.exception.RRException;
 
 /**

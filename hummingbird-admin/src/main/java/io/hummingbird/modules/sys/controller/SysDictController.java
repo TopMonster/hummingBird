@@ -12,7 +12,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import io.hummingbird.common.entity.SysDictEntity;
+import io.hummingbird.common.core.entity.SysDictEntity;
 import io.hummingbird.common.service.SysDictService;
 import io.hummingbird.common.utils.PageUtils;
 import io.hummingbird.common.utils.R;

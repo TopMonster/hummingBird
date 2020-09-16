@@ -15,8 +15,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import io.hummingbird.common.dao.TblProductConfigDao;
-import io.hummingbird.common.entity.TblProductConfigEntity;
+import io.hummingbird.common.core.dao.TblProductConfigDao;
+import io.hummingbird.common.core.entity.TblProductConfigEntity;
 import io.hummingbird.entity.ProductEntity;
 import io.hummingbird.service.ProductService;
 

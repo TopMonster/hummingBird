@@ -10,8 +10,8 @@ package io.hummingbird.modules.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import io.hummingbird.common.dao.SysRoleDeptDao;
-import io.hummingbird.common.entity.SysRoleDeptEntity;
+import io.hummingbird.common.core.dao.SysRoleDeptDao;
+import io.hummingbird.common.core.entity.SysRoleDeptEntity;
 import io.hummingbird.modules.sys.service.SysRoleDeptService;
 
 import org.springframework.stereotype.Service;

@@ -12,8 +12,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import io.hummingbird.common.dao.SysLogDao;
-import io.hummingbird.common.entity.SysLogEntity;
+import io.hummingbird.common.core.dao.SysLogDao;
+import io.hummingbird.common.core.entity.SysLogEntity;
 import io.hummingbird.common.utils.PageUtils;
 import io.hummingbird.common.utils.Query;
 import io.hummingbird.modules.sys.service.SysLogService;

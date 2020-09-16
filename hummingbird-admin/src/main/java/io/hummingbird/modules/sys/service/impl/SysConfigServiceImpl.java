@@ -13,8 +13,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
 
-import io.hummingbird.common.dao.SysConfigDao;
-import io.hummingbird.common.entity.SysConfigEntity;
+import io.hummingbird.common.core.dao.SysConfigDao;
+import io.hummingbird.common.core.entity.SysConfigEntity;
 import io.hummingbird.common.exception.RRException;
 import io.hummingbird.common.utils.PageUtils;
 import io.hummingbird.common.utils.Query;

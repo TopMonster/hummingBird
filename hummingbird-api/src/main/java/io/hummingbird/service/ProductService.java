@@ -3,7 +3,7 @@ package io.hummingbird.service;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import io.hummingbird.common.entity.TblProductConfigEntity;
+import io.hummingbird.common.core.entity.TblProductConfigEntity;
 
 public interface ProductService extends IService<TblProductConfigEntity>{
 

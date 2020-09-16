@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+		<#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+<div class="form-group" v-show="showList">
+		  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="职位名称">
+	  </div>
+	   	  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.city" @keyup.enter="query" placeholder="所在城市">
+	  </div>
+	   	  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.type" @keyup.enter="query" placeholder="职位类型">
+	  </div>
+	   	  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.companyType" @keyup.enter="query" placeholder="公司类型">
+	  </div>
+	   	  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.education" @keyup.enter="query" placeholder="学历">
+	  </div>
+	   	  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.vacancyNum" @keyup.enter="query" placeholder="空缺数量">
+	  </div>
+	   	  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.duty" @keyup.enter="query" placeholder="职责描述">
+	  </div>
+	   	  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.status" @keyup.enter="query" placeholder="状态">
+	  </div>
+	   	  	  		  	  		  			  	  		  			<div class="form-group col-sm-2">
+	     <input type="text" class="form-control" v-model="q.publishDate" @keyup.enter="query" placeholder="发布日期">
+	  </div>
+	   	  	   </div>
+ <div style="clear:both"></div>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-default" @click="query"><i class="fa fa-search"></i>&nbsp;查询</a></a>
+            <a class="btn btn-default" @click="e_export"><i class="fa fa-plus"></i>&nbsp;导出</a></a>
+			<#if shiro.hasPermission("sys:bizjob:save")>
+            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			</#if>
+			<#if shiro.hasPermission("sys:bizjob:update")>
+            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			</#if>
+			<#if shiro.hasPermission("sys:bizjob:delete")>
+            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			</#if>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+																		  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">职位名称</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="bizJob.name" placeholder="职位名称"/>
+                        </div>
+                    </div>
+                                         															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">所在城市</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="bizJob.city" placeholder="所在城市"/>
+                        </div>
+                    </div>
+                                         															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">职位类型</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="bizJob.type" placeholder="职位类型"/>
+                        </div>
+                    </div>
+                                         															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">公司类型</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="bizJob.companyType" placeholder="公司类型"/>
+                        </div>
+                    </div>
+                                         															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">学历</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="bizJob.education" placeholder="学历"/>
+                        </div>
+                    </div>
+                                         															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">空缺数量</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="bizJob.vacancyNum" placeholder="空缺数量"/>
+                        </div>
+                    </div>
+                                         															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">职责描述</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="bizJob.duty" placeholder="职责描述"/>
+                        </div>
+                    </div>
+                                         															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">状态</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="bizJob.status" placeholder="状态"/>
+                        </div>
+                    </div>
+                                         															  															  				                        															  				                        <div class="form-group">
+                        <div class="col-sm-2 control-label">发布日期</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="bizJob.publishDate" placeholder="发布日期"/>
+                        </div>
+                    </div>
+                                         							            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/sys/bizjob.js?_${.now?long}"></script>
+</body>
+</html>

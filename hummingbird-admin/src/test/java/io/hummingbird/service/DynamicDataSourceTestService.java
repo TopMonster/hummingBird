@@ -8,8 +8,8 @@
 
 package io.hummingbird.service;
 
-import io.hummingbird.common.dao.SysUserDao;
-import io.hummingbird.common.entity.SysUserEntity;
+import io.hummingbird.common.core.dao.SysUserDao;
+import io.hummingbird.common.core.entity.SysUserEntity;
 import io.hummingbird.commons.dynamic.datasource.annotation.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

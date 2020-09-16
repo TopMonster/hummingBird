@@ -3,7 +3,7 @@ package io.hummingbird.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import io.hummingbird.common.entity.UserEntity;
+import io.hummingbird.common.core.entity.UserEntity;
 import io.hummingbird.form.LoginForm;
 
 /**

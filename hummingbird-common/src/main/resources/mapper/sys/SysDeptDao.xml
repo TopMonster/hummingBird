@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="io.hummingbird.common.dao.SysDeptDao">
+<mapper namespace="io.hummingbird.common.core.dao.SysDeptDao">
 
-	<select id="queryList" resultType="io.hummingbird.common.entity.SysDeptEntity">
+	<select id="queryList" resultType="io.hummingbird.common.core.entity.SysDeptEntity">
 		select t1.*,(select t2.name from sys_dept t2 where t2.dept_id=t1.parent_id)parentName from sys_dept t1
 			where t1.del_flag = 0
 		<if test="sql_filter != null">

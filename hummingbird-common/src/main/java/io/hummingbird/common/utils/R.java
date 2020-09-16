@@ -4,7 +4,7 @@ package io.hummingbird.common.utils;
 
 import java.util.HashMap;
 
-import io.hummingbird.common.enums.ErrorCodeEnum;
+import io.hummingbird.common.core.enums.ErrorCodeEnum;
 
 /**
  * 返回数据

@@ -11,8 +11,8 @@ package io.hummingbird.modules.sys.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import io.hummingbird.common.dao.SysUserRoleDao;
-import io.hummingbird.common.entity.SysUserRoleEntity;
+import io.hummingbird.common.core.dao.SysUserRoleDao;
+import io.hummingbird.common.core.entity.SysUserRoleEntity;
 import io.hummingbird.modules.sys.service.SysUserRoleService;
 
 import org.springframework.stereotype.Service;

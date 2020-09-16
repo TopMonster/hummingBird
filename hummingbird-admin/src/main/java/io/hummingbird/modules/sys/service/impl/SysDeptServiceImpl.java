@@ -11,8 +11,8 @@ package io.hummingbird.modules.sys.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import io.hummingbird.common.annotation.DataFilter;
-import io.hummingbird.common.dao.SysDeptDao;
-import io.hummingbird.common.entity.SysDeptEntity;
+import io.hummingbird.common.core.dao.SysDeptDao;
+import io.hummingbird.common.core.entity.SysDeptEntity;
 import io.hummingbird.modules.sys.service.SysDeptService;
 
 import org.springframework.stereotype.Service;

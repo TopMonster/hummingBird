@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.hummingbird.common.annotation.SysLog;
-import io.hummingbird.common.entity.SysMenuEntity;
+import io.hummingbird.common.core.entity.SysMenuEntity;
 import io.hummingbird.common.exception.RRException;
 import io.hummingbird.common.utils.Constant;
 import io.hummingbird.common.utils.R;

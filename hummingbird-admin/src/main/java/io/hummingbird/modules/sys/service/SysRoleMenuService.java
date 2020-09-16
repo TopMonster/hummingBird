@@ -10,7 +10,7 @@ package io.hummingbird.modules.sys.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import io.hummingbird.common.entity.SysRoleMenuEntity;
+import io.hummingbird.common.core.entity.SysRoleMenuEntity;
 
 import java.util.List;
 

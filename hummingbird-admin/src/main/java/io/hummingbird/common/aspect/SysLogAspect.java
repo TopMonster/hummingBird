@@ -5,8 +5,8 @@ package io.hummingbird.common.aspect;
 import com.google.gson.Gson;
 
 import io.hummingbird.common.annotation.SysLog;
-import io.hummingbird.common.entity.SysLogEntity;
-import io.hummingbird.common.entity.SysUserEntity;
+import io.hummingbird.common.core.entity.SysLogEntity;
+import io.hummingbird.common.core.entity.SysUserEntity;
 import io.hummingbird.common.utils.HttpContextUtils;
 import io.hummingbird.common.utils.IPUtils;
 import io.hummingbird.modules.sys.service.SysLogService;

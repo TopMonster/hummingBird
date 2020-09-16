@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.hummingbird.common.entity.SysDeptEntity;
+import io.hummingbird.common.core.entity.SysDeptEntity;
 import io.hummingbird.common.utils.Constant;
 import io.hummingbird.common.utils.R;
 import io.hummingbird.modules.sys.service.SysDeptService;

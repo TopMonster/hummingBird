@@ -2,7 +2,7 @@ package io.hummingbird.modules.sys.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import io.hummingbird.common.entity.TblProductConfigEntity;
+import io.hummingbird.common.core.entity.TblProductConfigEntity;
 import io.hummingbird.common.utils.PageUtils;
 
 import java.util.List;

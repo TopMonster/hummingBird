@@ -1,6 +1,6 @@
 package io.hummingbird.entity;
 
-import io.hummingbird.common.entity.TblProductConfigEntity;
+import io.hummingbird.common.core.entity.TblProductConfigEntity;
 import lombok.Data;
 
 /**

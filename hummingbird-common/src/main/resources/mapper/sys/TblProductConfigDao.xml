@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="io.hummingbird.common.dao.TblProductConfigDao">
+<mapper namespace="io.hummingbird.common.core.dao.TblProductConfigDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="io.hummingbird.common.entity.TblProductConfigEntity" id="tblProductConfigMap">
+    <resultMap type="io.hummingbird.common.core.entity.TblProductConfigEntity" id="tblProductConfigMap">
         <result property="id" column="ID"/>
         <result property="createdTime" column="created_time"/>
         <result property="updatedTime" column="updated_time"/>
@@ -29,7 +29,7 @@
         <result property="status" column="status"/>
     </resultMap>
 
-    <select id="listTblProductConfigEntity" parameterType="String" resultType="io.hummingbird.common.entity.TblProductConfigEntity">
+    <select id="listTblProductConfigEntity" parameterType="String" resultType="io.hummingbird.common.core.entity.TblProductConfigEntity">
         select distinct(tpc.ID),tpsr.order_num,tpc.*
         from tbl_product_config as tpc
         LEFT JOIN tbl_product_shelf_relation as tpsr on tpsr.product_code = tpc.product_code

@@ -11,7 +11,7 @@ package io.hummingbird.modules.sys.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import io.hummingbird.common.entity.SysLogEntity;
+import io.hummingbird.common.core.entity.SysLogEntity;
 import io.hummingbird.common.utils.PageUtils;
 
 import java.util.Map;

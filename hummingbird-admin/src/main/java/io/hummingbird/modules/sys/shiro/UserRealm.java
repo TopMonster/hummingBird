@@ -10,10 +10,10 @@ package io.hummingbird.modules.sys.shiro;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
-import io.hummingbird.common.dao.SysMenuDao;
-import io.hummingbird.common.dao.SysUserDao;
-import io.hummingbird.common.entity.SysMenuEntity;
-import io.hummingbird.common.entity.SysUserEntity;
+import io.hummingbird.common.core.dao.SysMenuDao;
+import io.hummingbird.common.core.dao.SysUserDao;
+import io.hummingbird.common.core.entity.SysMenuEntity;
+import io.hummingbird.common.core.entity.SysUserEntity;
 import io.hummingbird.common.utils.Constant;
 
 import org.apache.commons.lang.StringUtils;

@@ -10,7 +10,7 @@ package io.hummingbird.modules.sys.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import io.hummingbird.common.entity.SysConfigEntity;
+import io.hummingbird.common.core.entity.SysConfigEntity;
 import io.hummingbird.common.utils.PageUtils;
 
 import java.util.Map;

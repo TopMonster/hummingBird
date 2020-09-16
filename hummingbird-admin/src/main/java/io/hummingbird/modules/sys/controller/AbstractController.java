@@ -12,7 +12,7 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.hummingbird.common.entity.SysUserEntity;
+import io.hummingbird.common.core.entity.SysUserEntity;
 
 /**
  * Controller公共组件

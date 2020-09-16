@@ -12,7 +12,7 @@ package io.hummingbird.modules.sys.redis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.hummingbird.common.entity.SysConfigEntity;
+import io.hummingbird.common.core.entity.SysConfigEntity;
 import io.hummingbird.common.utils.RedisKeys;
 import io.hummingbird.common.utils.RedisUtils;
 

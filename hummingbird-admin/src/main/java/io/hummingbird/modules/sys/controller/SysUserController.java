@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import io.hummingbird.common.annotation.SysLog;
-import io.hummingbird.common.entity.SysRoleEntity;
-import io.hummingbird.common.entity.SysUserEntity;
-import io.hummingbird.common.entity.SysUserRoleEntity;
+import io.hummingbird.common.core.entity.SysRoleEntity;
+import io.hummingbird.common.core.entity.SysUserEntity;
+import io.hummingbird.common.core.entity.SysUserRoleEntity;
 import io.hummingbird.common.utils.PageUtils;
 import io.hummingbird.common.utils.R;
 import io.hummingbird.common.validator.Assert;

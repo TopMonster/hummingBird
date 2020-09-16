@@ -9,7 +9,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import io.hummingbird.annotation.LoginUser;
-import io.hummingbird.common.entity.UserEntity;
+import io.hummingbird.common.core.entity.UserEntity;
 import io.hummingbird.interceptor.AuthorizationInterceptor;
 
 /**

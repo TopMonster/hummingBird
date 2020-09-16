@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import io.hummingbird.common.entity.SysUserEntity;
+import io.hummingbird.common.core.entity.SysUserEntity;
 import io.hummingbird.common.utils.RedisUtils;
 
 @RunWith(SpringRunner.class)

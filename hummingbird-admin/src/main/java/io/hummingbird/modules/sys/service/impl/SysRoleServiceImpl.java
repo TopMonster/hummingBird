@@ -13,9 +13,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import io.hummingbird.common.annotation.DataFilter;
-import io.hummingbird.common.dao.SysRoleDao;
-import io.hummingbird.common.entity.SysDeptEntity;
-import io.hummingbird.common.entity.SysRoleEntity;
+import io.hummingbird.common.core.dao.SysRoleDao;
+import io.hummingbird.common.core.entity.SysDeptEntity;
+import io.hummingbird.common.core.entity.SysRoleEntity;
 import io.hummingbird.common.utils.Constant;
 import io.hummingbird.common.utils.PageUtils;
 import io.hummingbird.common.utils.Query;

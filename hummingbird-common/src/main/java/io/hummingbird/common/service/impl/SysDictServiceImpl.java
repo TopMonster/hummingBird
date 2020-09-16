@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import io.hummingbird.common.dao.SysDictDao;
-import io.hummingbird.common.entity.SysDictEntity;
+import io.hummingbird.common.core.dao.SysDictDao;
+import io.hummingbird.common.core.entity.SysDictEntity;
 import io.hummingbird.common.exception.RRException;
 import io.hummingbird.common.service.SysDictService;
 import io.hummingbird.common.utils.PageUtils;

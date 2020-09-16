@@ -4,7 +4,7 @@ package io.hummingbird.common.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import io.hummingbird.common.entity.SysDictEntity;
+import io.hummingbird.common.core.entity.SysDictEntity;
 import io.hummingbird.common.utils.PageUtils;
 
 import java.util.List;

@@ -15,8 +15,8 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import io.hummingbird.annotation.BlackForbiden;
-import io.hummingbird.common.entity.SysDictEntity;
-import io.hummingbird.common.enums.ErrorCodeEnum;
+import io.hummingbird.common.core.entity.SysDictEntity;
+import io.hummingbird.common.core.enums.ErrorCodeEnum;
 import io.hummingbird.common.exception.RRException;
 import io.hummingbird.common.service.SysDictService;
 import io.hummingbird.common.utils.IPUtils;

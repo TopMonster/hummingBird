@@ -1,32 +1,33 @@
 package io.hummingbird.controller;
 
-import io.hummingbird.common.service.SysDictService;
-import io.hummingbird.common.utils.R;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import io.hummingbird.common.service.SysDictService;
+import io.hummingbird.common.utils.R;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 推荐管理
  *
  */
-@Api(tags = "推荐文案管理")
+@Api(tags = "示例")
 @RestController
-@RequestMapping("api/recommend")
-public class RecommendController {
+@RequestMapping("api/demo")
+public class DemoController {
 
 	@Autowired
 	private SysDictService sysDictService;
 
 	@GetMapping("/list")
-	@ApiOperation(value = "获取所有推荐话术")
+	@ApiOperation(value = "获取列表")
 	public R list() {
 		Map<String, List<String>> maps = new HashMap<>();
 		maps.put("customerNames", sysDictService.listByType("customerNames"));

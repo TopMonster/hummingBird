@@ -20,7 +20,7 @@ import lombok.ToString;
 @Data
 @ToString
 @ApiModel(value = "设备信息")
-public class HeaderInfoEntity {
+public class DeviceInfoEntity {
 	private String os;
 
 	private String deviceId;

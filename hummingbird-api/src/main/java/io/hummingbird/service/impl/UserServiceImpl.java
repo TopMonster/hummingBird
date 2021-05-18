@@ -18,7 +18,7 @@ import io.hummingbird.common.core.dao.UserDao;
 import io.hummingbird.common.core.entity.UserEntity;
 import io.hummingbird.common.exception.RRException;
 import io.hummingbird.common.validator.Assert;
-import io.hummingbird.form.LoginForm;
+import io.hummingbird.entity.LoginRequest;
 import io.hummingbird.service.UserService;
 
 @Service("userService")
@@ -30,7 +30,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
 	}
 
 	@Override
-	public String login(LoginForm form) {
+	public String login(LoginRequest form) {
 		UserEntity user = queryByMobile(form.getMobile());
 		Assert.isNull(user, "手机号或密码错误");
 		// 密码错误

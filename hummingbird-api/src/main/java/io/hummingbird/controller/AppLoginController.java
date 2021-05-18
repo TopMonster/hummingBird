@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.hummingbird.common.utils.R;
 import io.hummingbird.common.validator.ValidatorUtils;
-import io.hummingbird.form.LoginForm;
+import io.hummingbird.entity.LoginRequest;
 import io.hummingbird.service.UserService;
 import io.hummingbird.util.JwtUtils;
 import io.swagger.annotations.Api;
@@ -36,7 +36,7 @@ public class AppLoginController {
 	 */
 	@PostMapping("login")
 	@ApiOperation("登录")
-	public R login(@RequestBody LoginForm form) {
+	public R login(@RequestBody LoginRequest form) {
 		// 表单校验
 		ValidatorUtils.validateEntity(form);
 

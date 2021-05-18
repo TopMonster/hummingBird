@@ -4,7 +4,7 @@ package io.hummingbird.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import io.hummingbird.common.core.entity.UserEntity;
-import io.hummingbird.form.LoginForm;
+import io.hummingbird.entity.LoginRequest;
 
 /**
  * 用户
@@ -22,5 +22,5 @@ public interface UserService extends IService<UserEntity> {
 	 *            登录表单
 	 * @return 返回登录信息
 	 */
-	String login(LoginForm form);
+	String login(LoginRequest form);
 }

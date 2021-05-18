@@ -12,8 +12,8 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import com.alibaba.fastjson.JSON;
 
 import io.hummingbird.annotation.HeaderInfo;
-import io.hummingbird.entity.HeaderInfoEntity;
 import io.hummingbird.common.utils.IPUtils;
+import io.hummingbird.entity.DeviceInfoEntity;
 
 /**
  * 有@DeviceInfo注解的方法参数，注入当前设备信息
@@ -25,17 +25,17 @@ public class HeaderInfoHandlerMethodArgumentResolver implements HandlerMethodArg
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		return parameter.getParameterType().isAssignableFrom(HeaderInfoEntity.class)
+		return parameter.getParameterType().isAssignableFrom(DeviceInfoEntity.class)
 				&& parameter.hasParameterAnnotation(HeaderInfo.class);
 	}
 
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer container, NativeWebRequest request,
 			WebDataBinderFactory factory) throws Exception {
-		String deviceInfoStr = request.getHeader("deviceInfo");
-		HeaderInfoEntity headerInfoEntity = JSON.parseObject(deviceInfoStr, HeaderInfoEntity.class);
+		String deviceInfoStr = request.getHeader("DeviceInfo");
+		DeviceInfoEntity headerInfoEntity = JSON.parseObject(deviceInfoStr, DeviceInfoEntity.class);
 		if (headerInfoEntity == null) {
-			headerInfoEntity = new HeaderInfoEntity();
+			headerInfoEntity = new DeviceInfoEntity();
 		}
 		String userAgent = request.getHeader("User-Agent");
 		headerInfoEntity.setUserAgent(userAgent);

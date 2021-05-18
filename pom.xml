@@ -19,7 +19,6 @@
         <module>hummingbird-common</module>
         <module>hummingbird-admin</module>
         <module>hummingbird-api</module>
-		<module>hummingbird-dynamic-datasource</module>
         <module>hummingbird-generator</module>
     </modules>
 

@@ -30,7 +30,6 @@ public class TokenController {
 	@ApiOperation("校验token有效")
 	@Login
 	public R verify() {
-
 		return R.ok();
 	}
 

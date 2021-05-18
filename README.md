@@ -1,5 +1,5 @@
 **蜂鸟项目说明** 
-- 基于SpringBoot、MyBatis、Shiro框架，开发的一套系统
+- 基于SpringBoot、MyBatis、Shiro框架，开发的一套系统,支持api restful接口以及后台管理系统，减少重复代码开发
 <br>
 
 **具有如下特点** 
@@ -33,7 +33,7 @@ hummingbird-security
 │    ├─modules  模块
 │    │    ├─job 定时任务
 │    │    ├─oss 文件存储
-│    │    └─sys 系统管理(核心)
+│    │    └─sys 系统管理
 │    │ 
 │    └─resources 
 │        ├─mapper   MyBatis文件
